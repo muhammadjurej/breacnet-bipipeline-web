@@ -1,21 +1,20 @@
 from flask import Flask, request, jsonify, send_from_directory
 import requests, os
 
+# Folder static akan otomatis dilayani di /static/*
 app = Flask(__name__, static_folder="static")
 
+# Ambil URL model dari env (biar bisa diubah di Heroku config)
 SEG_URL = os.getenv("SEG_URL")
 CLS_URL = os.getenv("CLS_URL")
 API_KEY = os.getenv("API_KEY")
 
+# Serve index.html di root /
 @app.route("/")
 def index():
     return send_from_directory("static", "index.html")
 
-# Sajikan file asset/ yang berada di root repo
-@app.route("./asset/logo.png")
-def serve_asset(filename):
-    return send_from_directory("asset", filename)
-
+# Proxy ke backend segmentation
 @app.route("/segment", methods=["POST"])
 def segment():
     payload = request.get_json(silent=True) or {}
@@ -29,6 +28,7 @@ def segment():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Proxy ke backend classification
 @app.route("/classify", methods=["POST"])
 def classify():
     payload = request.get_json(silent=True) or {}
@@ -42,15 +42,12 @@ def classify():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# (opsional) healthcheck
+# Health check
 @app.route("/healthz")
 def health():
     return jsonify({"ok": True})
 
-# Catch-all terakhir: melayani file dalam static/
-@app.route("/<path:path>")
-def serve_static(path):
-    return send_from_directory("static", path)
-
+# Jalankan
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

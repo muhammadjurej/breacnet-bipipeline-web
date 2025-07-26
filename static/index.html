@@ -5,52 +5,45 @@
   <title>Breacnet - Bipipeline</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ Favicon sama dengan logo -->
-  <link rel="icon" type="image/png" href="../asset/logo.png" />
+  <!-- ✅ Favicon logo -->
+  <link rel="icon" type="image/png" href="/static/asset/logo.png" />
 
-  <!-- ✅ Inter (modern font) -->
+  <!-- ✅ Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- ✅ CSS tema smooth pink + white card -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
   <section class="card" role="region" aria-label="Breacnet Breast‑Cancer Detection Demo">
     
     <!-- ✅ Logo -->
-    <img src="../asset/logo.png" alt="Breacnet Logo" class="logo" />
+    <img src="/static/asset/logo.png" alt="Breacnet Logo" class="logo" />
 
-    <!-- ✅ Judul & tagline -->
     <h1>Breacnet – Breast‑Cancer Detection</h1>
-    <p class="tagline">Upload image → segment → classify with Bi-pipeline Model.</p>
+    <p class="tagline">Upload image → segment → classify with Bi‑pipeline Model.</p>
 
-    <!-- ✅ Controls (upload & button) -->
     <div class="controls">
       <label class="file-upload" aria-label="Choose image file">
         <input type="file" id="fileInput" accept="image/*" />
         <span>📂 Choose Image</span>
       </label>
 
-      <button id="btnRun" type="button" aria-live="polite">
-        🚀 Run Detection
-      </button>
+      <button id="btnRun" type="button" aria-live="polite">🚀 Run Detection</button>
     </div>
 
     <p class="helper">Supported formats: JPG, PNG, JPEG</p>
 
-    <!-- ✅ Segmentation Result -->
     <h3>🖼 Segmented Crop</h3>
     <img id="crop" width="224" alt="Segmented breast region output" />
 
-    <!-- ✅ Classification Result -->
     <h3>📊 Classification Result</h3>
     <pre id="result" aria-live="polite" role="status">–</pre>
-
   </section>
 
-  <!-- ✅ Script -->
-  <script src="app.js"></script>
+  <!-- ✅ JS -->
+  <script src="/static/app.js"></script>
 </body>
 </html>
