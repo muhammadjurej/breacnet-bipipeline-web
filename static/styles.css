@@ -1,0 +1,230 @@
+/* ==========================================================================
+   Smooth Pink + White Card — Clean Medical Look
+   - Card putih bersih, teks gelap
+   - Background pink pastel
+   ========================================================================== */
+
+:root {
+  /* Background pastel pink */
+  --bg-1: hsl(340 65% 96%);
+  --bg-2: hsl(340 70% 98%);
+
+  /* Card & text */
+  --card-bg: #ffffff;
+  --txt: hsl(340 20% 20%);
+  --muted: hsl(340 10% 45%);
+
+  /* Aksen pink */
+  --accent-1: hsl(340 80% 72%);
+  --accent-2: hsl(340 70% 65%);
+  --accent-3: hsl(340 60% 55%);
+
+  --border: hsla(340 40% 70% / 0.3);
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.06);
+  --ring: 0 0 0 3px rgba(255, 192, 203, 0.4);
+
+  --font-sans: "Inter", "Poppins", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+  --fs-h1: clamp(1.6rem, 1.2rem + 2.2vw, 2.6rem);
+  --fs-h3: clamp(1.05rem, 0.9rem + 0.6vw, 1.25rem);
+  --fs-body: clamp(0.95rem, 0.86rem + 0.3vw, 1.05rem);
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--txt);
+  line-height: 1.55;
+  font-size: var(--fs-body);
+
+  /* Background soft pink pastel */
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
+  background:
+    radial-gradient(800px 500px at 20% 20%, hsl(340 85% 94%), transparent 60%),
+    radial-gradient(1000px 700px at 80% 10%, hsl(340 80% 96%), transparent 60%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+/* ===== Card putih ===== */
+.card {
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 1rem + 1vw, 2.2rem);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  container-type: inline-size;
+}
+
+/* ===== Logo ===== */
+.logo {
+  width: clamp(130px, 100px + 12vw, 200px);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08));
+  opacity: 0.98;
+  animation: float 6s ease-in-out infinite;
+  user-select: none;
+}
+
+/* ===== Headings ===== */
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 .75rem;
+  line-height: 1.15;
+  color: var(--txt);
+}
+
+.tagline {
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  margin: 1.4rem 0 .6rem;
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  color: var(--txt);
+}
+
+/* ===== Controls ===== */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.25rem;
+}
+
+/* File Upload Button */
+.file-upload {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .8rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(120deg, var(--accent-2), var(--accent-1));
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  outline: none;
+}
+.file-upload:hover { transform: translateY(-1px); }
+.file-upload:active { transform: translateY(0); filter: brightness(.98); }
+
+.file-upload input[type="file"] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer;
+}
+
+/* Primary Action Button */
+#btnRun {
+  padding: .8rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: none;
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform .25s ease, box-shadow .25s ease, filter .2s ease;
+  position: relative;
+}
+#btnRun:hover { transform: translateY(-1px); }
+#btnRun:focus-visible { outline: none; box-shadow: var(--ring), var(--shadow-md); }
+
+#btnRun:disabled {
+  cursor: not-allowed;
+  filter: saturate(.5) contrast(.95);
+  color: transparent;
+}
+#btnRun:disabled::after {
+  content: "";
+  position: absolute; inset: 0;
+  margin: auto;
+  width: 1.15em; height: 1.15em;
+  border: 2.5px solid rgba(255,255,255,0.6);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* ===== Image & Result ===== */
+img {
+  display: block;
+  max-width: 260px;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.05);
+  margin: .5rem auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: transform .25s ease;
+}
+img:hover { transform: scale(1.03); }
+
+pre {
+  text-align: left;
+  background: #fafafa;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  color: var(--txt);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  min-height: 3.1rem;
+}
+
+/* ===== Helper text ===== */
+.helper {
+  color: var(--muted);
+  font-size: .9em;
+  margin-top: -.25rem;
+}
+
+/* ===== Animations ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Container queries for the card ===== */
+@container (min-width: 560px) {
+  .controls { gap: 1rem; }
+  img { max-width: 280px; }
+}
+
+/* Safe area for mobile */
+@supports (padding: max(0px)) {
+  body { padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+}
