@@ -1,4 +1,3 @@
-// FRONTEND hanya panggil backend Heroku (proxy)
 const SEG_URL = "/segment";
 const CLS_URL = "/classify";
 

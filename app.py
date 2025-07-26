@@ -1,20 +1,17 @@
 from flask import Flask, request, jsonify, send_from_directory
 import requests, os
 
-# Folder static akan otomatis dilayani di /static/*
+
 app = Flask(__name__, static_folder="static")
 
-# Ambil URL model dari env (biar bisa diubah di Heroku config)
 SEG_URL = os.getenv("SEG_URL")
 CLS_URL = os.getenv("CLS_URL")
 API_KEY = os.getenv("API_KEY")
 
-# Serve index.html di root /
 @app.route("/")
 def index():
     return send_from_directory("static", "index.html")
 
-# Proxy ke backend segmentation
 @app.route("/segment", methods=["POST"])
 def segment():
     payload = request.get_json(silent=True) or {}
@@ -28,7 +25,6 @@ def segment():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Proxy ke backend classification
 @app.route("/classify", methods=["POST"])
 def classify():
     payload = request.get_json(silent=True) or {}
